@@ -1,0 +1,45 @@
+void ancestor_print(NODE root)
+{
+
+    struct stack{
+        NODE address;
+        int flag;
+    };
+    NODE cur;
+    struct stack s[20];
+    int top=-1;
+    int A[100];
+    int k=0;
+    if(root==NULL)
+    {
+        printf("\n empty ");
+    }
+
+    else{
+    cur=root;
+        while(1)
+        {
+            while(cur!=NULL)
+            {
+                s[++top].address=cur;
+                s[top].flag=1;
+                cur=cur->lchild;
+               // printf("abcd");
+            }
+            while(s[top].flag<0)
+            {
+                cur=s[top].address;
+                printf("\n%d: ",cur->data);
+                /* just print stack contents*/
+                for(int i=top-1;i>=0;i--)
+                    printf(" %d ",s[i].address->data);
+                    top--;
+                if(top==-1)
+                    return;
+            }
+            cur=s[top].address;
+            cur=cur->rchild;
+            s[top].flag=-1;
+        }
+    }
+}
